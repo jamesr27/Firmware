@@ -358,6 +358,19 @@ MulticopterAttitudeControl::sensor_bias_poll()
 
 }
 
+
+// James. Motor throttle poll
+void
+MulticopterAttitudeControl::motor_throttle_poll()
+{
+	bool updated;
+	orb_check(_motor_throttle_sub, &updated);
+
+	if (updated){
+		orb_copy(ORB_ID(motor_throttle), _motor_throttle_sub, &_motor_throttle);
+	}
+}
+
 /**
  * Attitude controller.
  * Input: 'vehicle_attitude_setpoint' topics (depending on mode)
@@ -601,6 +614,8 @@ MulticopterAttitudeControl::run()
 	_vehicle_status_sub = orb_subscribe(ORB_ID(vehicle_status));
 	_motor_limits_sub = orb_subscribe(ORB_ID(multirotor_motor_limits));
 	_battery_status_sub = orb_subscribe(ORB_ID(battery_status));
+	// James adds
+	_motor_throttle_sub = orb_subscribe(ORB_ID(motor_throttle));
 
 	_gyro_count = math::min(orb_group_count(ORB_ID(sensor_gyro)), MAX_GYRO_COUNT);
 
@@ -673,6 +688,8 @@ MulticopterAttitudeControl::run()
 			vehicle_attitude_poll();
 			sensor_correction_poll();
 			sensor_bias_poll();
+			// James adds
+			motor_throttle_poll();
 
 			/* Check if we are in rattitude mode and the pilot is above the threshold on pitch
 			 * or roll (yaw can rotate 360 in normal att control).  If both are true don't
@@ -750,11 +767,27 @@ MulticopterAttitudeControl::run()
 				_actuators.timestamp_sample = _sensor_gyro.timestamp;
 
 				/* scale effort by battery status */
-				if (_bat_scale_en.get() && _battery_status.scale > 0.0f) {
-					for (int i = 0; i < 4; i++) {
-						_actuators.control[i] *= _battery_status.scale;
-					}
-				}
+				// James doesn't like the below...
+//				if (_bat_scale_en.get() && _battery_status.scale > 0.0f) {
+//					for (int i = 0; i < 4; i++) {
+//						_actuators.control[i] *= _battery_status.scale;
+//					}
+//				}
+
+
+				// B-1000 James addition. add the throttle to the actuators
+				_actuators.control[4] = _motor_throttle.throttle;
+
+				// B-1000 hacking. Overwrite controller ouptu for tests.
+//				if (1)
+//				{
+//					_actuators.controls[0] = roll_ovr;
+//					_actuators.controls[1] = pitch_ovr;
+//					_actuators.controls[2] = yaw_ovr;
+//					_actuators.controls[3] = coll_ovr;
+//				}
+
+
 
 				if (!_actuators_0_circuit_breaker_enabled) {
 					if (_actuators_0_pub != nullptr) {

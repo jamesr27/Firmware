@@ -87,6 +87,9 @@
 #include "mavlink_parameters.h"
 #include "mavlink_timesync.h"
 
+// James additions
+#include <uORB/topics/rotor_rpm.h>
+
 class Mavlink;
 
 class MavlinkReceiver
@@ -160,6 +163,8 @@ private:
 	void handle_message_named_value_float(mavlink_message_t *msg);
 	void handle_message_debug(mavlink_message_t *msg);
 	void handle_message_debug_vect(mavlink_message_t *msg);
+	// B-1000
+	void handle_message_rotor_rpm(mavlink_message_t *msg);
 
 	void *receive_thread(void *arg);
 
@@ -243,6 +248,10 @@ private:
 	static const int _gps_inject_data_queue_size = 6;
 	orb_advert_t _gps_inject_data_pub;
 	orb_advert_t _command_ack_pub;
+
+	// B-1000
+	orb_advert_t _rotor_rpm;
+
 	int _control_mode_sub;
 	int _actuator_armed_sub;
 	uint64_t _global_ref_timestamp;

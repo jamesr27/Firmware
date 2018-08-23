@@ -117,6 +117,13 @@ set(config_module_list
 	modules/mc_pos_control
 	modules/vtol_att_control
 
+    #
+    # B-1000 stuff
+    #
+    modules/motor_controller
+    modules/motor_kill
+    modules/rotor_rpm_reader
+
 	#
 	# Logging
 	#
@@ -131,17 +138,17 @@ set(config_module_list
 	#
 	# OBC challenge
 	#
-	examples/bottle_drop
+	#examples/bottle_drop
 
 	#
 	# Rover apps
 	#
-	examples/rover_steering_control
+	#examples/rover_steering_control
 
 	#
 	# Segway
 	#
-	examples/segway
+	#examples/segway
 
 	#
 	# Demo apps

@@ -132,6 +132,8 @@ set(msg_files
 	wind_estimate.msg
 	motor_kill.msg
 	rotor_rpm.msg
+	motor_throttle.msg
+	motor_controller_log.msg
 	)
 
 if(NOT EXTERNAL_MODULES_LOCATION STREQUAL "")

@@ -2016,7 +2016,7 @@ Mavlink::task_main(int argc, char *argv[])
 	case MAVLINK_MODE_NORMAL:
 		configure_stream("ADSB_VEHICLE");
 		configure_stream("ALTITUDE", 1.0f);
-		configure_stream("ATTITUDE", 20.0f);
+		configure_stream("ATTITUDE", 5.0f);
 		configure_stream("ATTITUDE_TARGET", 2.0f);
 		configure_stream("CAMERA_IMAGE_CAPTURED");
 		configure_stream("COLLISION");
@@ -2042,6 +2042,10 @@ Mavlink::task_main(int argc, char *argv[])
 		configure_stream("VFR_HUD", 4.0f);
 		configure_stream("VISION_POSITION_ESTIMATE", 1.0f);
 		configure_stream("WIND_COV", 1.0f);
+		// James adds
+		configure_stream("MOTORKILL",0.2f);
+		configure_stream("ROTORRPM",2.0f);
+		configure_stream("ACTUATOR_CONTROL_TARGET0", 1.0f);
 		break;
 
 	case MAVLINK_MODE_ONBOARD:

@@ -1,0 +1,26 @@
+#!nsh
+#
+# @name B-1000 Helicopter
+#
+# @type Helicopter
+# @class Copter
+#
+# @maintainer James Reeves
+#
+# @output MAIN1 front swashplate
+# @output MAIN2 right swashplate
+# @output MAIN3 left swashplate servo
+# @output MAIN4 tail rotor servo
+# @output MAIN5 engine throttle
+#
+
+sh /etc/init.d/rc.hc_defaults
+
+# Configure as helicopter (number 4 defined in commander_helper.cpp)
+set MAV_TYPE 4
+
+set MIXER b1000prototype
+
+#set PWM_OUT 123456
+
+set HIL no

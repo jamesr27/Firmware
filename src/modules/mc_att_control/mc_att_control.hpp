@@ -55,6 +55,7 @@
 #include <uORB/topics/vehicle_control_mode.h>
 #include <uORB/topics/vehicle_rates_setpoint.h>
 #include <uORB/topics/vehicle_status.h>
+#include <uORB/topics/motor_throttle.h>
 
 /**
  * Multicopter attitude control app start / stop handling function
@@ -107,6 +108,7 @@ private:
 	void		vehicle_motor_limits_poll();
 	void		vehicle_rates_setpoint_poll();
 	void		vehicle_status_poll();
+	void		motor_throttle_poll();
 
 	/**
 	 * Attitude controller.
@@ -136,6 +138,8 @@ private:
 	int		_sensor_gyro_sub[MAX_GYRO_COUNT];	/**< gyro data subscription */
 	int		_sensor_correction_sub{-1};	/**< sensor thermal correction subscription */
 	int		_sensor_bias_sub{-1};		/**< sensor in-run bias correction subscription */
+	// James
+	int 	_motor_throttle_sub{-1};
 
 	unsigned _gyro_count{1};
 	int _selected_gyro{0};
@@ -160,6 +164,7 @@ private:
 	struct sensor_gyro_s			_sensor_gyro {};	/**< gyro data before thermal correctons and ekf bias estimates are applied */
 	struct sensor_correction_s		_sensor_correction {};	/**< sensor thermal corrections */
 	struct sensor_bias_s			_sensor_bias {};	/**< sensor in-run bias corrections */
+	struct motor_throttle_s			_motor_throttle {}; //James adds motor throttle.
 
 	MultirotorMixer::saturation_status _saturation_status{};
 
@@ -234,7 +239,14 @@ private:
 		(ParamFloat<px4::params::SENS_BOARD_Y_OFF>) _board_offset_y,
 		(ParamFloat<px4::params::SENS_BOARD_Z_OFF>) _board_offset_z,
 
-		(ParamFloat<px4::params::VT_WV_YAWR_SCL>) _vtol_wv_yaw_rate_scale		/**< Scale value [0, 1] for yaw rate setpoint  */
+		(ParamFloat<px4::params::VT_WV_YAWR_SCL>) _vtol_wv_yaw_rate_scale,		/**< Scale value [0, 1] for yaw rate setpoint  */
+
+		// James adds B-1000 parameters
+		(ParamFloat<px4::params::MC_PITCH_OVR>)  pitch_ovr,
+		(ParamFloat<px4::params::MC_ROLL_OVR>)  roll_ovr,
+		(ParamFloat<px4::params::MC_COLL_OVR>)  coll_ovr,
+		(ParamFloat<px4::params::MC_YAW_OVR>)  yaw_ovr,
+		(ParamFloat<px4::params::MC_ROLL_OFFSET>)  roll_off
 	)
 
 	matrix::Vector3f _attitude_p;		/**< P gain for attitude control */
