@@ -21,6 +21,6 @@ set MAV_TYPE 4
 
 set MIXER b1000mk2
 
-#set PWM_OUT 123456
+set PWM_OUT 123456
 
 set HIL no
