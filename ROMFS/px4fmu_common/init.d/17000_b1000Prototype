@@ -19,7 +19,7 @@ sh /etc/init.d/rc.hc_defaults
 # Configure as helicopter (number 4 defined in commander_helper.cpp)
 set MAV_TYPE 4
 
-set MIXER b1000prototype
+set MIXER b1000Prototype
 
 #set PWM_OUT 123456
 

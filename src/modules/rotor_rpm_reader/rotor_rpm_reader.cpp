@@ -131,7 +131,7 @@ RotorRpmReader::~RotorRpmReader()
  	_control_task = px4_task_spawn_cmd("rotor_rpm_reader",
  		SCHED_DEFAULT,
  		SCHED_PRIORITY_MAX-40,
- 		1500,
+ 		1800,
  		(px4_main_t)&RotorRpmReader::task_main_trampoline,
  		nullptr);
 

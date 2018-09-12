@@ -5,8 +5,8 @@ px4_add_module(
 	MODULE modules__rotor_rpm_reader
 	MAIN rotor_rpm_reader
 	PRIORITY "SCHED_PRIORITY_MAX-40"
-	STACK_MAIN 1500
-	STACK_MAX 2000
+	STACK_MAIN 2000
+	STACK_MAX 2400
 	COMPILE_FLAGS -Os
 	SRCS
 		rotor_rpm_reader.cpp

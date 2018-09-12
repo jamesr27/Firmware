@@ -97,6 +97,8 @@ px4_add_romfs_files(
 	14002_tri_y_yaw-
 	15001_coax_heli
 	16001_helicopter
+	17000_b1000Prototype
+	17001_b1000mk2
 	50000_generic_ground_vehicle
 	50001_axialracing_ax10
 	50002_traxxas_stampede_2wd
@@ -107,6 +109,8 @@ px4_add_romfs_files(
 	rc.interface
 	rc.io
 	rc.logging
+	rc.hc_apps
+	rc.hc_defaults
 	rc.mc_apps
 	rc.mc_defaults
 	rcS

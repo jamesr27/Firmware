@@ -2,10 +2,21 @@
 
 set VEHICLE_TYPE mc
 
-set PWM_OUTPUTS 123456
+set PWM_OUT 123
 set PWM_DISARMED 1000
 set PWM_MIN 1000
 set PWM_MAX 2000
+
+set PWM_OUT 4
+set PWM_DISARMED 1500
+set PWM_MIN 1000
+set PWM_MAX 2000
+
+set PWM_OUT 5
+set PWM_DISARMED 1650
+set PWM_MIN 1000
+set PWM_MAX 2000
+
 
 # This is the gimbal pass mixer
 set MIXER_AUX pass

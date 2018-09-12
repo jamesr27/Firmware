@@ -22,7 +22,7 @@ then
 	# Try to start LPE. If it fails, start EKF2 as a default
 	# Unfortunately we do not build it on px4fmu-v2 due to a limited flash.
 	if attitude_estimator_q start
-	then
+	thenm
 		local_position_estimator start
 	else
 		echo "ERROR [init] Estimator LPE not available. Using EKF2"
@@ -46,3 +46,9 @@ mc_pos_control start
 # Start Land Detector
 #
 land_detector start multicopter
+
+
+# Start the rotor rpm and motor kill modules module
+motor_controller start
+motor_kill start
+rotor_rpm_reader start

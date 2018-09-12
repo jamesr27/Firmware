@@ -1,5 +1,45 @@
-R: 4x 10000 10000 10000 0
+#	Helicopter Mixing File
+#==================================================
+#
+#	This file defines mixers for a helicopter. 
+#	The following ordering is used for the mixing: 
+#	channel 1 (ROLL), channel 2 (PITCH), channel 3 (Collective), channel 4 (yaw). 
+#	throttle is on actuator[4] (channel 5).
+#
+#
+#==================================================
+
+#Output 1 - Front Servo
+M: 3
+O:       10000   10000      0 -10000  10000
+S: 0 0    -1352    -1352   	0 -10000  10000
+S: 0 1    1550    1550   	0 -10000  10000
+S: 0 3   2300     2300 -3500 -10000  10000
+
+#Output 2 - Right Servo
+M: 3
+O:       10000  10000      0 -10000  10000
+S: 0 0    -667   -667      0 -10000  10000
+S: 0 1    -1946   -1946      0 -10000  10000
+S: 0 3   2300    2300 -2000 -10000  10000
+
+#Output 3 - Left Servo
+M: 3
+O:       10000  10000      0 -10000  10000
+S: 0 0    -2020   -2020      0 -10000  10000
+S: 0 1    -396   -396      0 -10000  10000
+S: 0 3   -2300  -2300     2000 -10000  10000
+
+#Output 4 - Tail Servo
 M: 1
-S: 3 5  10000  10000      0 -10000  10000
+O:      10000  10000      0 -10000  10000
+S: 0 2  -5000  -5000      -4100 -10000  10000
+
+#Output 5 - Throttle. I go from 0 to 1 in my controller code.
 M: 1
-S: 3 6  10000  10000      0 -10000  10000
+O:      10000  10000      0 -10000  10000
+S: 0 4  0  -18000 	  8000 -10000  10000
+
+Z:
+Z:
+Z:

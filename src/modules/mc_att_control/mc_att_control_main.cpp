@@ -778,13 +778,13 @@ MulticopterAttitudeControl::run()
 				// B-1000 James addition. add the throttle to the actuators
 				_actuators.control[4] = _motor_throttle.throttle;
 
-				// B-1000 hacking. Overwrite controller ouptu for tests.
+				// B-1000 hacking. Overwrite controller output for tests.
 //				if (1)
 //				{
-//					_actuators.controls[0] = roll_ovr;
-//					_actuators.controls[1] = pitch_ovr;
-//					_actuators.controls[2] = yaw_ovr;
-//					_actuators.controls[3] = coll_ovr;
+//					_actuators.control[0] = 0;//roll_ovr;
+//					_actuators.control[1] = 0;//pitch_ovr;
+//					_actuators.control[2] = 0;//yaw_ovr;
+//					_actuators.control[3] = 0.5;//coll_ovr;
 //				}
 
 
