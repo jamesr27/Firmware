@@ -51,6 +51,8 @@
 #include <uORB/topics/vehicle_status.h>
 #include <uORB/topics/vehicle_gps_position.h>
 #include <uORB/topics/vehicle_command_ack.h>
+// James adds
+#include <uORB/topics/motor_controller_log.h>
 
 #include <drivers/drv_hrt.h>
 #include <px4_includes.h>
@@ -646,6 +648,8 @@ void Logger::add_default_topics()
 	add_topic("vehicle_vision_position");
 	add_topic("vtol_vehicle_status", 200);
 	add_topic("wind_estimate", 200);
+	// James adds the motor controller stuff
+	add_topic("motor_controller_log",100);
 	add_topic("timesync_status");
 
 #ifdef CONFIG_ARCH_BOARD_SITL
