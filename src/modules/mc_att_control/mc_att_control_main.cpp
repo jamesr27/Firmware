@@ -392,6 +392,14 @@ MulticopterAttitudeControl::control_attitude(float dt)
 	Quatf q(_v_att.q);
 	Quatf qd(_v_att_sp.q_d);
 
+
+
+	// James adds.
+	// Can we add the roll offset now. 3 degrees for now.
+	qd.rotate({0.0523,0.0,0.0});
+	//printf("%0.3f\n",(double)_v_att_sp.roll_body);
+
+
 	/* ensure input quaternions are exactly normalized because acosf(1.00001) == NaN */
 	q.normalize();
 	qd.normalize();

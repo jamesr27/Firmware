@@ -323,7 +323,7 @@ MotorController::run_controller(float dt)
 			 }
 
 			 // Case 3: We run the governor if started.
-			 else if (((_switch_state == 1 || _switch_state == 2)) && _motor_kill.kill_switch == false && _motor_started) // Run the controller in full with appropraite set point.
+			 else if (((_switch_state == 1 || _switch_state == 2)) && _motor_kill.kill_switch == false && _motor_started) // Run the controller in full with appropriate set point.
 			 {
 
 				 // Calculate the filtered rpm command. This is a rate transition from current rpm to target rpm at some rate.
@@ -333,16 +333,13 @@ MotorController::run_controller(float dt)
 					 // Rate transition command to idle rpm.
 					 rate_transition(_filtered_rpm_command, _params.motor_control_idleRpm,dt);
 					 // Rate transition the _throttle_offset
-					 rate_transition(_throttle_offset, _params.motor_control_iff, dt/500); // This may be correct.
+					 rate_transition(_throttle_offset, _params.motor_control_iff, dt/500);
 				 }
 				 if (_switch_state == 2)
 				 {
 					 // Rate transition command to flight rpm.
 					 rate_transition(_filtered_rpm_command, _params.motor_control_nomRpm,dt);
 
-					 // Old way
-					 // Rate transition the feed forward.
-					 //rate_transition(_throttle_offset, _params.motor_control_fff, dt/500); // This may be correct.
 
 					 // New way, link to actuator collective value.
 					 _throttle_offset = _ff_gradient * _actuator_controls.control[3] + _params.motor_control_iff;
@@ -354,7 +351,7 @@ MotorController::run_controller(float dt)
 
 
 
-				 // Do a rpm sensor timeout failsafe. Only if in flight mode
+				 // Do a rpm sensor timeout failsafe. Only if in flight mode. Hopefully it will be able to carry on flying with this setting.
 				 if (_switch_state == 2)
 				 {
 					 if (_rc_channels.channels[9] > 0.0f && _rc_channels.channels[10] > 0.0f)
@@ -364,7 +361,7 @@ MotorController::run_controller(float dt)
 					 }
 					 else if((hrt_absolute_time() - _rotor_rpm.updateTime) > 3000000.0f)
 					 {
-						_motor_throttle.throttle = 0.65f + _idle_offset;
+						_motor_throttle.throttle = 0.75f + _idle_offset;
 					 }
 				 }
 
