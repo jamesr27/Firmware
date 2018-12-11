@@ -197,6 +197,8 @@ MulticopterAttitudeControl::parameters_updated()
 			M_DEG_TO_RAD_F * _board_offset_y.get(),
 			M_DEG_TO_RAD_F * _board_offset_z.get()));
 	_board_rotation = board_rotation_offset * _board_rotation;
+
+	_roll_offset = math::radians(roll_off.get());
 }
 
 void
@@ -395,8 +397,8 @@ MulticopterAttitudeControl::control_attitude(float dt)
 
 
 	// James adds.
-	// Can we add the roll offset now. 3 degrees for now.
-	qd.rotate({0.0523,0.0,0.0});
+	// We add the roll offset now. Takes from the parameter.
+	qd.rotate({_roll_offset,0.0,0.0});
 	//printf("%0.3f\n",(double)_v_att_sp.roll_body);
 
 
