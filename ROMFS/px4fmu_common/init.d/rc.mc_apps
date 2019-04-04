@@ -49,6 +49,6 @@ land_detector start multicopter
 
 # James. Start B-1000 apps
 motor_controller start
-motor_kill start
+#motor_kill start
 rotor_rpm_reader start
 
