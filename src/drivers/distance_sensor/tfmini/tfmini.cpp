@@ -173,7 +173,7 @@ TFMINI::TFMINI(const char *port, uint8_t rotation) :
 	CDev("tfmini", RANGE_FINDER0_DEVICE_PATH),
 	_rotation(rotation),
 	_min_distance(0.30f),
-	_max_distance(12.0f),
+	_max_distance(22.0f),
 	_conversion_interval(10000),
 	_reports(nullptr),
 	_measure_ticks(0),
@@ -232,7 +232,7 @@ TFMINI::init()
 
 	case 1: /* TFMINI (12m, 100 Hz)*/
 		_min_distance = 0.3f;
-		_max_distance = 12.0f;
+		_max_distance = 22.0f;
 		_conversion_interval =	10000;
 		break;
 
